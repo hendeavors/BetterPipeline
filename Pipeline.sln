@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipeline", "Pipeline\Pipeline.csproj", "{DC62CABB-D1BB-4E2A-B735-7B22F4B2E3F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipelineTests", "PipelineTests\PipelineTests.csproj", "{3CF0CFCE-0D36-4AED-9BA9-90FF5FF6872E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC62CABB-D1BB-4E2A-B735-7B22F4B2E3F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC62CABB-D1BB-4E2A-B735-7B22F4B2E3F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC62CABB-D1BB-4E2A-B735-7B22F4B2E3F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC62CABB-D1BB-4E2A-B735-7B22F4B2E3F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF0CFCE-0D36-4AED-9BA9-90FF5FF6872E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF0CFCE-0D36-4AED-9BA9-90FF5FF6872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF0CFCE-0D36-4AED-9BA9-90FF5FF6872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF0CFCE-0D36-4AED-9BA9-90FF5FF6872E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
