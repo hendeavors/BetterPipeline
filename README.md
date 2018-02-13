@@ -18,12 +18,46 @@ public class ProcessFilesPipeline : Pipeline<FileInfo>
 }
 ```
 
-#built in pipelines - the runner
+# creating a stage
+
+You must implement 
+
+```C# 
+IStage<T> 
+```
 
 ```C#
-PipelineRunner<int> pipeline = new PipelineRunner<int>();
+// stage one
+public class CreateOrder : IStage<int>
+{
+    public int Execute(int input)
+    {
+        int result = input + 1;
 
-pipeline.Register(new ConcreteStage())
-.Register(new ConcreteStageTwo());
+        return result;
+    }
+}
+
+// stage two
+public class ProcessPayment : IStage<int>
+{
+    public int Execute(int input)
+    {
+        int result = input + 1;
+
+        return result;
+    }
+}
+
+// stage three
+public class SendInvoice : IStage<int>
+{
+    public int Execute(int input)
+    {
+        int result = input + 1;
+
+        return result;
+    }
+}
 
 ```
