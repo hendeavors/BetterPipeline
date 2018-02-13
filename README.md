@@ -102,7 +102,7 @@ pipeline.Register(new CreateOrder())
 pipeline.Process(0);
 ```
 
-The aggregate pipeline runner works the same as the pipeline runner except that it uses the result from a previous stage. A mixed stage is not supported here.
+The aggregate pipeline runner works the same as the pipeline runner except that it uses the result from a previous stage as input into the next stage. A mixed stage is not supported here.
 ```C#
 Pipeline<int> pipeline = new AggregatePipelineRunner<int>();
 // using the Register method
