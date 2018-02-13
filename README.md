@@ -9,7 +9,7 @@ You may extend the generic pipeline and override the process method defined
 ```C#
 public class ProcessOrdersPipeline : Pipeline<OrdersCollection>
 {
-    public ProcessFilesPipeline()
+    public ProcessOrdersPipeline()
     {
     }
     
