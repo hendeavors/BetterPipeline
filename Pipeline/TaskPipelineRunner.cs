@@ -14,7 +14,7 @@ namespace BetterPipeline
             tasks = new Task[capacity];
         }
 
-        public override Task Process(K input)
+        public override void Process(K input)
         {
             foreach(IMixedStage<Task,K> s in stages)
             {
@@ -24,8 +24,6 @@ namespace BetterPipeline
             }
 
             Task.WaitAll(tasks);
-
-            return Task.FromResult(input);
         }
     }
 }

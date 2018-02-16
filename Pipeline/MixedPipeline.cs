@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BetterPipeline
 {
@@ -37,7 +38,7 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The process.</returns>
         /// <param name="input">Input.</param>
-        public abstract T Process(K input);
+        public abstract void Process(K input);
 
         /// <summary>
         /// Gets the stages.

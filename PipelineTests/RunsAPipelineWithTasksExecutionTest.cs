@@ -12,28 +12,22 @@ namespace PipelineTests
         }
 
         [Fact]
-        public void AggregatePipelineRunnerTaskResultTest()
+        public void TaskPipelineRunnerTest()
         {
-            TaskPipelineRunner<int> p = new TaskPipelineRunner<int>(3);
-            p.Pipe(new ConcreteStage())
-             .Pipe(new ConcreteStage())
-             .Pipe(new ConcreteStageTwo());
-
-
+            TaskPipelineRunner<int> p = new TaskPipelineRunner<int>(2);
+            p.Pipe(new CreateOrder())
+             .Pipe(new ProcessPayment());
 
             p.Process(0);
         }
 
-        public partial class ConcreteStage : IMixedStage<Task,int>
+        public partial class CreateOrder : IMixedStage<Task,int>
         {
             public Task Execute(int input)
             {
-                var f = new TaskFactory(TaskCreationOptions.LongRunning,
-                          TaskContinuationOptions.None);
-
-
-
-                var loadTask = f.StartNew(() =>
+                var factory = new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
+                
+                var createOrderTask = factory.StartNew(() =>
                 {
                     int sum = 0;
                     for (int i = 0; i < 10000000; i++)
@@ -44,20 +38,17 @@ namespace PipelineTests
                     return sum;
                 });
 
-
-
-                return loadTask;
+                return createOrderTask;
             }
         }
 
-        public partial class ConcreteStageTwo : IMixedStage<Task,int>
+        public partial class ProcessPayment : IMixedStage<Task,int>
         {
             public Task Execute(int input)
             {
-                var f = new TaskFactory(TaskCreationOptions.LongRunning,
-                          TaskContinuationOptions.None);
+                var factory = new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
 
-                var loadTask = f.StartNew(() =>
+                var processPaymentTask = factory.StartNew(() =>
                 {
                     int sum = 0;
                     for (int i = 0; i < 10000000; i++)
@@ -68,7 +59,7 @@ namespace PipelineTests
                     return sum;
                 });
 
-                return loadTask;
+                return processPaymentTask;
             }
         }
     }
