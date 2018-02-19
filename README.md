@@ -63,6 +63,7 @@ public class SendInvoice : IStage<int>
 ```
 # Putting it all together
 
+C#
 ```C#
 Pipeline<int> pipeline = new ProcessOrdersPipeline();
 // alternatively you may use the Register method to add your stages
@@ -71,6 +72,15 @@ pipeline.Pipe(new CreateOrder())
 .Pipe(new SendInvoice());
 
 pipeline.Process(0);
+```
+VB.Net
+```C#
+Dim pipeline As Pipeline(Of Integer) = New ProcessOrdersPipeline()
+// alternatively you may use the Register method to add your stages
+pipeline.Pipe(New CreateOrder())
+.Pipe(New ProcessPayment())
+.Pipe(New SendInvoice())
+pipeline.Process(0)
 ```
 
 If you want to return a different type within a stage:
