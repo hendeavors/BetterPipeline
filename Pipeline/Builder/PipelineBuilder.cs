@@ -6,34 +6,33 @@ namespace BetterPipeline.Builder
     /// <summary>
     /// Pipeline builder.
     /// </summary>
-    public class PipelineBuilder<T>
+    public abstract class PipelineBuilder<T>
     {
-        private IStage<T>[] stages;
+        /// <summary>
+        /// The stages.
+        /// </summary>
+        protected readonly IList<IStage<T>> stages = new List<IStage<T>>();
 
-        private int counter = 0;
-
-        public PipelineBuilder(int capacity)
+        /// <summary>
+        /// Pipe the specified stage.
+        /// </summary>
+        /// <returns>The pipe.</returns>
+        /// <param name="stage">Stage.</param>
+        public PipelineBuilder<T> Pipe(IStage<T> stage)
         {
-            stages = new IStage<T>[capacity];
-        }
-
-        public PipelineBuilder<T> Add(IStage<T> stage)
-        {
-            stages[counter] = stage;
-
-            counter++;
+            stages.Add(stage);
 
             return this;
         }
 
-        public Pipeline<T> build(Pipeline<T> pipeline)
+        /// <summary>
+        /// Register the specified stage.
+        /// </summary>
+        /// <returns>The register.</returns>
+        /// <param name="stage">Stage.</param>
+        public PipelineBuilder<T> Register(IStage<T> stage)
         {
-            for (int i = 0; i < counter; i++ )
-            {
-                pipeline.Register(stages[i]);
-            }
-
-            return pipeline;
+            return Pipe(stage);
         }
     }
 }
