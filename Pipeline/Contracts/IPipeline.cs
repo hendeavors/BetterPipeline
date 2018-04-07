@@ -3,12 +3,7 @@ using System.Threading.Tasks;
 
 namespace BetterPipeline
 {
-    public interface IPipeline<T>
+    public interface IPipeline<T> : IPipelineBuilder<T>, IProcessPipeline<T>
     {
-        T Process(T input);
-
-        IPipeline<T> Pipe(IStage<T> stage);
-
-        IPipeline<T> Register(IStage<T> stage);
     }
 }

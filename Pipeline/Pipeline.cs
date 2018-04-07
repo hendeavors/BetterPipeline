@@ -31,7 +31,7 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The pipe.</returns>
         /// <param name="stage">Stage.</param>
-        public IPipeline<T> Pipe(IStage<T> stage)
+        public virtual IPipelineBuilder<T> Pipe(IStage<T> stage)
         {
             stages.Add(stage);
 
@@ -43,7 +43,7 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The register.</returns>
         /// <param name="stage">Stage.</param>
-        public IPipeline<T> Register(IStage<T> stage)
+        public IPipelineBuilder<T> Register(IStage<T> stage)
         {
             return Pipe(stage);
         }

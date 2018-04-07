@@ -4,22 +4,23 @@ using System.Threading.Tasks;
 
 namespace BetterPipeline
 {
-    public abstract class TaskPipeline<T> : ITaskPipeline<T>
+    public abstract class TaskProcess<T> : ITaskProcess<T>, IPipelineBuilder<T>
     {
-        public TaskPipeline()
+        public TaskProcess()
         {
         }
+
         /// <summary>
         /// The stages.
         /// </summary>
-        protected readonly IList<ITaskStage<T>> stages = new List<ITaskStage<T>>();
+        protected readonly IList<IStage<T>> stages = new List<IStage<T>>();
 
         /// <summary>
         /// Pipe the specified stage.
         /// </summary>
         /// <returns>The pipe.</returns>
         /// <param name="stage">Stage.</param>
-        public ITaskPipeline<T> Pipe(ITaskStage<T> stage)
+        public IPipelineBuilder<T> Pipe(IStage<T> stage)
         {
             stages.Add(stage);
 
@@ -31,11 +32,11 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The register.</returns>
         /// <param name="stage">Stage.</param>
-        public ITaskPipeline<T> Register(ITaskStage<T> stage)
+        public IPipelineBuilder<T> Register(IStage<T> stage)
         {
             return Pipe(stage);
         }
-    
+
         /// <summary>
         /// Process the specified input.
         /// </summary>
@@ -47,7 +48,7 @@ namespace BetterPipeline
         /// Gets the stages.
         /// </summary>
         /// <returns>The stages.</returns>
-        public IList<ITaskStage<T>> GetStages()
+        public IList<IStage<T>> GetStages()
         {
             return stages;
         }
