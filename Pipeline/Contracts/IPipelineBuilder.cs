@@ -6,5 +6,7 @@ namespace BetterPipeline
         IPipelineBuilder<T> Pipe(IStage<T> stage);
 
         IPipelineBuilder<T> Register(IStage<T> stage);
+
+        IPipelineBuilder<T> Pipe(Pipeline<T> p);
     }
 }

@@ -31,9 +31,19 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The pipe.</returns>
         /// <param name="stage">Stage.</param>
-        public virtual IPipelineBuilder<T> Pipe(IStage<T> stage)
+        public IPipelineBuilder<T> Pipe(IStage<T> stage)
         {
             stages.Add(stage);
+
+            return this;
+        }
+
+        public IPipelineBuilder<T> Pipe(Pipeline<T> p)
+        {
+            foreach(var s in p.GetStages())
+            {
+                stages.Add(s);
+            }
 
             return this;
         }
