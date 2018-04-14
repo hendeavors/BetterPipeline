@@ -19,7 +19,7 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The pipe.</returns>
         /// <param name="stage">Stage.</param>
-        public ITaskPipeline<T> Pipe(ITaskStage<T> stage)
+        public ITaskPipelineBuilder<T> Pipe(ITaskStage<T> stage)
         {
             stages.Add(stage);
 
@@ -31,7 +31,7 @@ namespace BetterPipeline
         /// </summary>
         /// <returns>The register.</returns>
         /// <param name="stage">Stage.</param>
-        public ITaskPipeline<T> Register(ITaskStage<T> stage)
+        public ITaskPipelineBuilder<T> Register(ITaskStage<T> stage)
         {
             return Pipe(stage);
         }
@@ -50,6 +50,16 @@ namespace BetterPipeline
         public IList<ITaskStage<T>> GetStages()
         {
             return stages;
+        }
+
+        public ITaskPipelineBuilder<T> Pipe(TaskPipeline<T> p)
+        {
+            foreach (var s in p.GetStages())
+            {
+                stages.Add(s);
+            }
+
+            return this;
         }
     }
 }

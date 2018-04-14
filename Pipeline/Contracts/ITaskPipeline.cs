@@ -3,12 +3,8 @@ using System.Threading.Tasks;
 
 namespace BetterPipeline
 {
-    public interface ITaskPipeline<T>
+    public interface ITaskPipeline<T> : ITaskPipelineBuilder<T>
     {
         Task<T> Process(T input);
-
-        ITaskPipeline<T> Pipe(ITaskStage<T> stage);
-
-        ITaskPipeline<T> Register(ITaskStage<T> stage);
     }
 }
