@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using BetterPipeline.Builder;
 
 namespace BetterPipeline
 {
     public abstract class Pipeline<T> : IPipeline<T>
     {
         /// <summary>
-        /// The stages.
+        /// The builder.
         /// </summary>
-        protected readonly IList<IStage<T>> stages = new List<IStage<T>>();
+        protected readonly IPipelineBuilder<T> builder = new PipelineBuilder<T>();
 
         /// <summary>
         /// Process the specified input.
@@ -23,7 +24,7 @@ namespace BetterPipeline
         /// <returns>The stages.</returns>
         public IList<IStage<T>> GetStages()
         {
-            return stages;
+            return builder.GetStages();
         }
 
         /// <summary>
@@ -33,19 +34,19 @@ namespace BetterPipeline
         /// <param name="stage">Stage.</param>
         public IPipelineBuilder<T> Pipe(IStage<T> stage)
         {
-            stages.Add(stage);
+            builder.Pipe(stage);
 
-            return this;
+            return builder;
         }
 
-        public IPipelineBuilder<T> Pipe(Pipeline<T> p)
+        public IPipelineBuilder<T> Pipe(IPipelineBuilder<T> p)
         {
             foreach(var s in p.GetStages())
             {
-                stages.Add(s);
+                builder.Pipe(s);
             }
 
-            return this;
+            return builder;
         }
 
         /// <summary>

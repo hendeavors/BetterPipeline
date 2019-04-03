@@ -6,7 +6,7 @@ namespace BetterPipeline.Builder
     /// <summary>
     /// Pipeline builder.
     /// </summary>
-    public abstract class PipelineBuilder<T>
+    public class PipelineBuilder<T> : IPipelineBuilder<T>
     {
         /// <summary>
         /// The stages.
@@ -18,7 +18,7 @@ namespace BetterPipeline.Builder
         /// </summary>
         /// <returns>The pipe.</returns>
         /// <param name="stage">Stage.</param>
-        public PipelineBuilder<T> Pipe(IStage<T> stage)
+        public IPipelineBuilder<T> Pipe(IStage<T> stage)
         {
             stages.Add(stage);
 
@@ -30,9 +30,29 @@ namespace BetterPipeline.Builder
         /// </summary>
         /// <returns>The register.</returns>
         /// <param name="stage">Stage.</param>
-        public PipelineBuilder<T> Register(IStage<T> stage)
+        public IPipelineBuilder<T> Register(IStage<T> stage)
         {
             return Pipe(stage);
+        }
+
+        /// <summary>
+        /// Pipe the specified pipeline.
+        /// </summary>
+        /// <returns>The pipe.</returns>
+        /// <param name="p">P.</param>
+        public IPipelineBuilder<T> Pipe(IPipelineBuilder<T> p)
+        {
+            foreach (var s in p.GetStages())
+            {
+                stages.Add(s);
+            }
+
+            return this;
+        }
+
+        public IList<IStage<T>> GetStages()
+        {
+            return stages;
         }
     }
 }

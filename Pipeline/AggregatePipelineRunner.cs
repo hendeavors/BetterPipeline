@@ -19,7 +19,7 @@ namespace BetterPipeline
         {
             T result = input;
 
-            foreach (IStage<T> stage in stages)
+            foreach (IStage<T> stage in builder.GetStages())
             {
                 result = stage.Execute(result);
             }
